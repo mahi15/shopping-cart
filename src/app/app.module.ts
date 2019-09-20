@@ -17,9 +17,10 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
 import { EditComponent } from './recipes/edit/edit.component';
 import {RecipeService} from './recipes/recipe.service';
 import {DataStorageService} from './shared/data-storage';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthComponent} from './auth/auth.component';
 import {LoaderSpinnerComponent} from './shared/loader/loader.spinner.component';
+import {AuthEnterception} from "./auth/auth-enterception";
 // import {RecipesResolverService} from "./recipes/recipes-resolver.service";
 
 @NgModule({
@@ -45,7 +46,13 @@ import {LoaderSpinnerComponent} from './shared/loader/loader.spinner.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ShoppingListService, RecipeService, DataStorageService ],
+  providers: [ShoppingListService, RecipeService, DataStorageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthEnterception,
+      multi: true
+    }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
