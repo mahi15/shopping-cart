@@ -22,9 +22,8 @@ export class HeaderComponent implements OnInit {
     });
    }
 
-   logout() {
+   onLogout() {
     this.authService.logout();
-    this.router.navigate(['./auth']);
    }
 
   onSaveData() {
