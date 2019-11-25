@@ -5,6 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
 
 import { UserModel } from './user.model';
+import {environment} from "../../environments/environment";
 
 export interface ResponseData {
   kind: string;
@@ -48,7 +49,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http
       .post<ResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDh3tai3zDKbQXivYn2BpToPaReCamW8-w',
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.fireBaseKey,
         {
            email,
            password,
